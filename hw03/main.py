@@ -1,82 +1,79 @@
 import turtle
 
 turtle.hideturtle()
-turtle.color('red')
-turtle.begin_fill()
-for i in range(2):
-    turtle.forward(240)
-    turtle.left(90)
-    turtle.forward(160)
-    turtle.left(90)
-turtle.up()
-turtle.color('red')
-turtle.end_fill()
-#矩形
+def draw_rectangle(start_x,start_y,rec_x,rec_y):
+    turtle.goto(start_x,start_y)
+    turtle.color('red')
+    turtle.begin_fill()
+    for i in range(2):
+        turtle.forward(rec_x)
+        turtle.left(90)
+        turtle.forward(rec_y)
+        turtle.left(90)
+    turtle.end_fill()
 
-turtle.goto(16,128)
-turtle.down()
-turtle.color('yellow','yellow')
-turtle.begin_fill()
-for i in range(5):
-    turtle.forward(48)
-    turtle.right(144)
-turtle.up()
-turtle.end_fill()
-#大星星
 
-turtle.goto(80,144)
-turtle.down()
-turtle.color('yellow','yellow')
-turtle.left(217)
-turtle.forward(8)
-turtle.right(162)
-turtle.begin_fill()
-for i in range(5):
-    turtle.forward(16)
-    turtle.right(144)
-turtle.end_fill()
-#第一个小星星
-    
-turtle.up()
-turtle.goto(96,128)
-turtle.down()
-turtle.color('yellow','yellow')
-turtle.left(172)
-turtle.forward(8)
-turtle.right(170)
-turtle.begin_fill()
-for i in range(5):
-    turtle.forward(16)
-    turtle.right(144)
-turtle.end_fill()
-#第二个小星星
+def draw_star(center_x,center_y,radius):
+    turtle.setpos(center_x,center_y)
+    #find the peak of the five-pointed star
+    pt1=turtle.pos()
+    turtle.circle(-radius,72)
+    pt2=turtle.pos()
+    turtle.circle(-radius,72)
+    pt3=turtle.pos()
+    turtle.circle(-radius,72)
+    pt4=turtle.pos()
+    turtle.circle(-radius,72)
+    pt5=turtle.pos()
+    #draw the five-pointed star
+    turtle.color('yellow','yellow')
+    turtle.begin_fill()
+    turtle.goto(pt3)
+    turtle.goto(pt1)
+    turtle.goto(pt4)
+    turtle.goto(pt2)
+    turtle.goto(pt5)
+    turtle.end_fill()
 
-turtle.up()
-turtle.goto(96,106)
-turtle.down()
-turtle.color('yellow','yellow')
-turtle.left(164)
-turtle.forward(8)
-turtle.right(164)
-turtle.begin_fill()
-for i in range(5):
-    turtle.forward(16)
-    turtle.right(144)
-turtle.end_fill()
-#第三个小星星
-
-turtle.up()
-turtle.goto(80,88)
-turtle.down()
-turtle.color('yellow','yellow')
-turtle.left(141)
-turtle.forward(8)
-turtle.right(162)
-turtle.begin_fill()
-for i in range(5):
-    turtle.forward(16)
-    turtle.right(144)
-turtle.up()
-turtle.end_fill()
-turtle.done()
-#第四个小星星
+#start the project
+turtle.penup()
+#draw the rectangle
+star_x=-320
+star_y=-260
+len_x=660
+len_y=440
+draw_rectangle(star_x,star_y,len_x,len_y)
+#draw the big star
+pice=660/30
+big_center_x=star_x+5*pice
+big_center_y=star_y+len_y-pice*5
+turtle.goto(big_center_x,big_center_y)
+turtle.left(90)
+turtle.forward(pice*3)
+turtle.right(90)
+draw_star(turtle.xcor(),turtle.ycor(),pice*3)
+#draw the small star
+turtle.goto(star_x+10*pice,star_y+len_y-pice*2)
+turtle.left(turtle.towards(big_center_x,big_center_y)-turtle.heading())
+turtle.forward(pice)
+turtle.right(90)
+draw_star(turtle.xcor(),turtle.ycor(),pice)
+#draw the second star
+turtle.goto(star_x+pice*12,star_y+len_y-pice*4)
+turtle.left(turtle.towards(big_center_x,big_center_y)-turtle.heading())
+turtle.forward(pice)
+turtle.right(90)
+draw_star(turtle.xcor(),turtle.ycor(),pice)
+#draw the third
+turtle.goto(star_x+pice*12,star_y+len_y-7*pice)
+turtle.left(turtle.towards(big_center_x,big_center_y)-turtle.heading())
+turtle.forward(pice)
+turtle.right(90)
+draw_star(turtle.xcor(),turtle.ycor(),pice)
+#draw the final
+turtle.goto(star_x+pice*10,star_y+len_y-9*pice)
+turtle.left(turtle.towards(big_center_x,big_center_y)-turtle.heading())
+turtle.forward(pice)
+turtle.right(90)
+turtle.done
+draw_star(turtle.xcor(),turtle.ycor(),pice)
